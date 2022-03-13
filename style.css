@@ -1,57 +1,96 @@
+/*
+ j'ai renommé tes classes pour que ça soit plus clair.
+ box1 et box2 c'est un peu chaud quand tu reviens dessus plus tard,
+ tu sais plus à quoi ça fait référence.
+
+ card-title, card-content, card-image, c'est beaucoup plus précis et tu peux modifier le 
+ css sans avoir besoin d'aller revoir le html
+*/
+
+/*
+histoire de pas s'emmerder avec des calculs pour la taille des éléments,
+on dis que quand on défini la taille d'un élémént, ses bordures et padding soient compris de dans.
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     background-color: hsl(212, 45%, 89%);
     margin: 0;
+    /* 
+    t'as la même police partout, mets la de manière générale
+    sur le body. Tous les éléments enfants hériteront de la police
+    aussi, tu peux ajouter ce qu'on appelle un "fallback" si jamais
+    la police n'arrive pas a être chargée, ici c'est un classique "sans-serif"
+    */
+    font-family: 'Outfit', sans-serif;
+     /*
+    on privilégie les line height sans unité
+    comme ça, on exprime un ratio 
+    */
+    line-height: 1.3;
 }
 
 .container {
     display: flex;
-    height: 100vh;  
+    justify-content: center;
+    /* 
+        On préfère mettre des min-height, 
+        dans le cas ou il y aurait beaucoup de contenu
+        ça permet au texte de dépasser de la fenêtre
+        et être scrollable
+    */
+    min-height: 100vh;  
 }
 
-.box1 {
-    width: 320px;
-    height: 497px;
-    margin: auto;
+/*
+ Pour pas mal de choses en dessous : 
+ On évite de définir des tailles en px parce que c'est pas flexible
+ on évite de définir des hauteur aux éléments, parce que si il y a finalement 
+ plus de texte, à mettre le texte va dépasser de manière dégueu de la l'élément
+*/
+
+.card {
+    /*
+        on défini une maxwidth,
+        comme ça sur mobile le contenu ne fera pas plus que la taille de l'écran
+    */
+    width: 300px;
+    max-width: 100%;
+    margin: auto 20px;
     background-color: white;
     border-radius: 18px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 20px 20px rgba(100, 100, 100, 0.25));
+    padding: 15px 15px 20px;
 
 }
 
-.image {
-    width: 288px;
-    height: 288px;
+.card-image {
     border-radius: 12px;
-    margin: 16px;
+    max-width: 100%;
 }
 
-.box2 {  
-    width: 288px;
-    height: 129px;
-    margin-left: 16px;
-    margin-bottom: 40px;
+.card-content {  
+    /*
+    tout le contenu est aligné au centre, on en profite pour mettre le align center ici
+    */
+    text-align: center;
 }
 
-.boxtext1 {
-    font-family: 'Outfit';
-    font-style: normal;
+.card-title {
     font-weight: 700;
     font-size: 22px;
-    line-height: 28px;
     color: #1F314F;
-    text-align: center;
 }
 
-.boxtext2 {
-    font-family: 'Outfit';
-    font-style: normal;
+.card-description {
     font-weight: 400;
     font-size: 15px;
-    line-height: 19px;
-    letter-spacing: 0.1875px;
+    /*
+    petit arrondi, faut éviter les gros nombres à virgules ^^
+    */
+    letter-spacing: 0.2px;
     color: #7D889E;
-    text-align: center;
-    width: 256px;
     margin-top: 16px;
-    margin-left: 16px;
 }
